@@ -1,1 +1,1 @@
-# -wecode-1-
+# wecode-prep-week1
