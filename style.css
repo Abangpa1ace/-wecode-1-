@@ -1,13 +1,13 @@
 :root {
-  --color-border: #331491;
-  --header: #c6b1ff;
-  --background: #f2ecfd; 
-  --info1: #fad3db;
-  --info2: #fdfad1;
-  --info3: #d9ffd7;
-  --info4: #d6edfc;
-}
-
+    --color-border: #331491;
+    --header: #c6b1ff;
+    --background: #f2ecfd; 
+    --info1: #f8dae0;
+    --info2: #dff8de;
+    --info3: #f8f6d9;
+    --info4: #dceefa;
+  }
+  
 * {
   padding: 0;
   margin: 0;
@@ -38,11 +38,12 @@ header h1 {
 
 header h1 strong {
   color: #000000;
+  padding-bottom: 3px;
   border-bottom: 2px solid var(--color-border);
 }
 
 header h1 strong:hover {
-  animation: name_sparkle 2s ease infinite;
+  animation: name_sparkle 2s linear infinite;
 }
 
 header .nav-list {
@@ -55,12 +56,18 @@ header .nav-list {
 .nav-list li a {
   padding: 0 15px;
   border-left: 1px solid var(--color-border);
-  color: #f0f0f0;
 }
 
+.nav-list li:hover a {
+  text-shadow: 1px 1px 5px var(--color-border);
+}
+  
 .nav-list li:first-child a {
   border-left: none;
-  color: var(--color-border);
+}
+
+.nav-list li:nth-child(n+2) a {
+  color: #f0f0f0;     /* delete after linked */
 }
 
 main {
@@ -85,7 +92,7 @@ main {
   background: var(--header);
   padding: 20px;
   border-radius: 50%;
-  z-index: 50;
+  z-index: 30;
 }
 
 .photo-container {
@@ -119,6 +126,14 @@ img.profile-photo {
   background: var(--info1);
 }
 
+.profile-list li {
+  margin: 15px 0;
+}
+
+.profile-list li p {
+  color: #000000;
+}
+
 #character {
   top: 0;
   right: 0;
@@ -126,6 +141,21 @@ img.profile-photo {
 
 #character .info-front, #character .info-back {
   background: var(--info2);
+}
+
+#character .info-back {
+  display: flex;
+  flex-direction: row;
+}
+
+.character-list {
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+}
+
+.character-list.good {
+  border-right: 1px dotted var(--color-border);
 }
 
 #interest {
@@ -137,6 +167,41 @@ img.profile-photo {
   background: var(--info3);
 }
 
+.interest-list {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 40px;
+}
+
+.interest-list li:nth-child(even) {
+  transform: translateY(40px);
+}
+
+.interest-list .interest-li-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.interest-list .interest-li-photo img {
+  height: 110%;
+}
+
+.interest-list li p {
+  font-size: 12px;
+}
+
+.interest-list li p>strong {
+  font-size: initial;
+  text-align: center;
+}
+
 #carrier {
   bottom: 0;
   right: 0;
@@ -146,8 +211,38 @@ img.profile-photo {
   background: var(--info4);
 }
 
-.info-container:hover {
-  transform: rotateY(180deg);
+.carrier-list {
+  margin-top: 10px;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.carrier-list .carrier-li-photo {
+  width: 160px;
+  height: 120px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.carrier-list .carrier-li-photo img {
+  height: 100%;
+  transform: translateX(-12%);
+}
+
+.carrier-list li p {
+  text-align: center;
+  color: #000000;
+}
+
+/* card spin animation */
+#profile:hover, #interest:hover {
+  animation: card_spin_left 1.2s linear forwards;
+}
+
+#character:hover, #carrier:hover {
+  animation: card_spin_right 1.2s linear forwards;
 }
 
 .info-front, .info-back {
@@ -160,6 +255,7 @@ img.profile-photo {
   padding: 30px;
   border-radius: 20px;
   backface-visibility: hidden;
+  color: var(--color-border)
 }
 
 .info-front {
@@ -172,7 +268,7 @@ img.profile-photo {
   flex-direction: column;
   align-items: flex-start;
   transform: rotateY(180deg);
-  font-size: 20px;
+  font-size: 16px;
 }
 
 footer {
@@ -192,16 +288,17 @@ footer {
   overflow: hidden;
 }
 
-.contact {
+.contact-list {
   display: flex;
   align-items: center;
 }
 
-.contact h3 {
+.contact-list h3 {
   margin-right: 30px;
 }
 
-.contact-list {
+.contact-list li {
+  position: relative;
   width: 50px;
   height: 50px;
   background-color: var(--background);
@@ -210,7 +307,7 @@ footer {
   margin: 0 10px;
 }
 
-.contact-list a {
+.contact-list li a {
   width: 100%;
   height: 100%;
   display: flex;
@@ -220,14 +317,69 @@ footer {
   color: #000000;
 }
 
+.contact-list li .contact-address {
+  background: var(--color-border);
+  color: var(--background);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0px;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  z-index: 100;
+  transition: all .3s ease;
+}
+
+.contact-list li .contact-address::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  transform: translateX(-50%);
+  border-top: 5px solid var(--color-border);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 0px solid transparent;
+}
+
+.contact-list li:hover {
+  background: var(--header);
+}
+
+/* .contact-list li:hover a {
+  color: var(--background);
+} */
+
+.contact-list li:hover .contact-address {
+  transform: translate(-50%, -12px);
+  opacity: 1;
+}
+
 #footer-container img {
   height: 120px;
 }
 
+/* header h1: name sparkling */
 @keyframes name_sparkle {
-  0% {color: #000000;}
-  25% {color: #682a2a;}
-  50% {color: #10b41e;}
-  75% {color: #ada12e;}
-  100% {color: #331491;}
+  25% {color: #881616;}
+  50% {color: #187a21;}
+  75% {color: #9e9013;}
+  100% {color: #165163;}
+}
+
+/* main .info-container: card spin */
+@keyframes card_spin_left {
+  20% {transform: translateX(-80px);}
+  60% {transform: rotateY(180deg) translateX(80px);}
+  100% {transform: rotateY(180deg) translateX(0px); z-index: 50;}
+}
+
+@keyframes card_spin_right {
+  20% {transform: translateX(80px);}
+  80% {transform: rotateY(-180deg) translateX(-80px);}
+  100% {transform: rotateY(-180deg) translateX(0px); z-index: 50;}
 }
