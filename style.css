@@ -151,11 +151,24 @@ img.profile-photo {
 .character-list {
   width: 50%;
   height: 100%;
-  padding: 10px;
+  padding: 0 10px;
 }
 
 .character-list.good {
   border-right: 1px dotted var(--color-border);
+}
+
+.character-list p {
+  text-align: center;
+  border-bottom: 1px dotted var(--color-border);
+  padding: 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.character-list li {
+  font-size: 20px;
+  margin: 15px 30px;
 }
 
 #interest {
@@ -350,17 +363,13 @@ footer {
   background: var(--header);
 }
 
-/* .contact-list li:hover a {
-  color: var(--background);
-} */
-
 .contact-list li:hover .contact-address {
   transform: translate(-50%, -12px);
   opacity: 1;
 }
 
 #footer-container img {
-  height: 120px;
+  height: 130px;
 }
 
 /* header h1: name sparkling */
